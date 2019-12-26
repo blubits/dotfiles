@@ -1,0 +1,6 @@
+#!/bin/sh
+
+~/.fehbg
+
+# kill second polybar
+pkill -f 'polybar -r second'

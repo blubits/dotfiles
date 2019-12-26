@@ -41,9 +41,11 @@ modules-right = network battery
 
 [bar/second]
 inherit = bar/base
+monitor = DP2
 width = 50%
 offset-x = 25%
 offset-y = 24
+modules-right = filesystem audio backlight
 
 #-------------------
 # Modules
@@ -142,6 +144,7 @@ label-mounted = %percentage_free%% free
 
 [module/backlight]
 type = internal/xbacklight
+output = eDP1
 format = <ramp> <label>
 
 ramp-0 = 

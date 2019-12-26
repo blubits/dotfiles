@@ -1,5 +1,20 @@
-picom -b
+#!/bin/sh
 
-polybar top -r &
-
+# wallpaper
 ~/.fehbg &
+
+# notifications
+dunst &
+
+# bar
+polybar -r top &
+if [ $(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l) == "2" ]; then
+    polybar -r second & 
+fi
+
+# compositor
+picom --experimental-backends -b
+
+
+
+
