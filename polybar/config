@@ -57,7 +57,7 @@ pin-workspaces = true
 
 icon-0 = Main;
 icon-1 = Dev;
-icon-default = 
+icon-default = 
 
 label-active = " %icon% "
 label-active-font = 3
@@ -66,10 +66,13 @@ label-active-underline = ${colors.foreground}
 
 label-occupied = " %icon% "
 label-occupied-font = 3
+label-occupied-foreground = ${colors.foreground-alt}
 label-urgent = " %icon% "
 label-urgent-font = 3
+label-urgent-foreground = ${colors.foreground-alt}
 label-empty = " %icon% "
 label-empty-font = 3
+label-empty-foreground = ${colors.foreground-alt}
 
 [module/clock]
 type = internal/date
@@ -126,7 +129,7 @@ format = ﮮ <label> updates
 interval = 3600
 
 [module/audio]
-type = internal/alsa
+type = internal/pulseaudio
 
 format-volume = <ramp-volume> <label-volume>
 label-muted = 婢 muted
