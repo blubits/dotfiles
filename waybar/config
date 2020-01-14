@@ -1,0 +1,99 @@
+[{
+    //-------------------
+    // Main bar layout
+    //-------------------
+    "layer": "top",
+    "output": "eDP-1",
+    "height": 40,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["custom/arch-updates", "pulseaudio", "network", "battery", "clock"],
+    //-------------------
+    // Modules
+    //-------------------
+    "sway/window": {
+        "format": "",
+        "max-length": 50
+    },
+    "sway/mode": {
+        "format": "缾 {}"
+    },
+    "custom/arch-updates": {
+        "format": " {}",
+        "interval": 3600,
+        "exec": "$HOME/sys/dotfiles/waybar/updates-arch-combined.sh",
+        "on-click": "kitty yay -Syu; pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": "ﱝ {icon}",
+        "format-muted": "ﱝ muted",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "&#8206;ﰝ&#8206;",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["奄", "奔", "墳"]
+        }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": " {ifname}: {ipaddr}",
+        "format-linked": " {ifname}: no IP",
+        "format-disconnected": " disconnected",
+        "format-alt": "{ifname}: {ipaddr}",
+        "format-icons": ["", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-full": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": {
+            "charging": ["", "", "", "", "", "", ""],
+            "default": ["", "", "", "", "", "", "", "", "", ""]
+        },
+        "format-alt": "{icon} {time}"
+    },
+    "clock": {
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "format-alt": "{:%Y-%m-%d}"
+    }
+}, {
+    //-------------------
+    // Secondary bar layout
+    //-------------------
+    "layer": "top",
+    "output": "DP-2",
+    "height": 40,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["custom/spotify", "clock"],
+    //-------------------
+    // Secondary bar modules
+    //-------------------
+    "sway/mode": {
+        "format": "缾 {}"
+    },
+    "custom/spotify": {
+        "format": "阮 {}",
+        "return-type": "json",
+        "max-length": 50,
+        "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotifyd",
+        "exec-if": "pgrep spt",
+        "on-click": "swaymsg workspace '5 阮'"
+    },
+    "cpu": {
+        "interval": 10,
+        "format": "﬙ {}%"
+    }
+}]

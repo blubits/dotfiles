@@ -1,6 +1,0 @@
-#!/bin/sh
-
-~/.fehbg
-
-# launch second polybar
-polybar -r second &

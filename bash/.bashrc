@@ -17,7 +17,14 @@ PATH=~/.bin:~/.bin/warnai:~/.local/bin:$PATH
 # Aliases
 #-------------------
 
+# Enable color
+alias todoist='todoist --color'
 alias ls='ls --color=auto'
+
+# Integrate pacman and yay, make the yay command AUR-only
+alias pac='/usr/bin/pacman'
+alias pacman='/usr/bin/yay'
+alias yay='/usr/bin/yay --aur'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

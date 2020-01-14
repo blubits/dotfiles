@@ -17,7 +17,7 @@ fi
 updates=$(("$updates_arch" + "$updates_aur"))
 
 if [ "$updates" -gt 0 ]; then
-    echo "$updates"
+    echo -e "$updates updates\\n$updates_arch package updates from repositories, $updates_aur from AUR\\nupdates-arch"
 else
     echo ""
 fi

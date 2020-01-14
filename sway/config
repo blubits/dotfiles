@@ -1,0 +1,226 @@
+#-------------------
+# Variables
+#-------------------
+
+## Modifier key. Mod4 is Super/Win
+set $mod Mod4
+
+## Default arrow bindings
+set $left h
+set $down j
+set $up k
+set $right l
+
+## Programs
+set $term kitty
+set $run wofi --show drun
+
+## Workspaces
+set $ws1 "1 爵"
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 切"
+set $ws5 "5 阮"
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+
+#-------------------
+# Outputs
+#-------------------
+
+## Displays
+# By default, sway will output to 1080p. This will allow it to autodetect
+# any non-4K monitor and output the appropriate resolution. The internal
+# laptop display (eDP-1) is set up to scale up to 4K.
+output eDP-1 scale 2
+output eDP-1 pos 0 0 res 3840x2160
+
+## Wallpaper
+output * bg "/home/blubits/pics/Wallpapers/Lanes.png" fill
+
+#-------------------
+# Inputs
+#-------------------
+
+input 2:7:SynPS/2_Synaptics_TouchPad {
+    tap enabled
+    dwt enabled
+    middle_emulation enabled
+    natural_scroll enabled
+}
+
+#-------------------
+# Layout & Appearance
+#-------------------
+
+# Borders
+default_border pixel 2
+default_floating_border normal=
+
+# Gaps
+gaps inner 15
+
+# Colors
+set $base00 #231f20
+set $base01 #1c3f95
+set $base02 #5a5758
+set $base03 #737171
+set $base04 #959ca1
+set $base05 #d9d8d8
+set $base06 #e7e7e8
+set $base07 #ffffff
+set $base08 #ee2e24
+set $base09 #f386a1
+set $base0A #ffd204
+set $base0B #00853e
+set $base0C #85cebc
+set $base0D #009ddc
+set $base0E #98005d
+set $base0F #b06110
+
+client.focused $base0D $base0D $base00 $base01 $base0D 
+client.focused_inactive $base02 $base02 $base03 $base01 $base02
+client.unfocused $base01 $base01 $base03 $base01 $base01
+client.urgent $base02 $base08 $base07 $base08 $base02 
+
+# Window
+for_window [app_id="floating"] {
+    floating enable
+    resize set height 50ppt
+}
+
+#-------------------
+# Bindings
+#-------------------
+
+## Floating modifier
+# $mod + left click to drag, $mod + right click to resize.
+floating_modifier $mod normal
+
+## Programs
+bindsym $mod+Return exec $term
+bindsym $mod+r exec $run
+
+# Quit
+bindsym $mod+q kill
+
+## Sway
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+## Windows
+# Moving window focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Moving window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+## Workspaces
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Move workspace between outputs
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+$left move workspace to output left
+bindsym $mod+Ctrl+$right move workspace to output right
+
+## Layouts
+# Switch between layouts on a container (stacking, tabbed, or regular split)
+bindsym $mod+g layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
+
+# Split container
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle floating
+bindsym $mod+space floating toggle
+
+# Toggle focus between floating window and tiled windows
+bindsym $mod+Shift+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+p focus parent
+
+## Scratchpad
+# Move to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+## Modes
+# Resizing mode
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+z mode "resize"
+
+#-------------------
+# Bar (handled by waybar)
+#-------------------
+
+bar {
+    swaybar_command waybar
+}
+
+include /etc/sway/config.d/*
