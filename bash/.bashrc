@@ -38,3 +38,4 @@ man() {
     command man "$@"
 }
 
+eval $(keychain --eval --quiet id_rsa)
