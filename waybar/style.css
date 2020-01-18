@@ -6,14 +6,20 @@
     min-height: 0;
 }
 
-window#waybar {
-    padding: 0 200px;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #ffffff;
+window {
+    background: transparent;
+}
+
+window > box {
+    margin-bottom: 5px;
+    background: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    color: white;
+    
 }
 
 #workspaces button {
-    padding: 0 18px;
+    padding: 0 22px;
     color: #ffffff;
     border-bottom: 3px solid transparent;
 }
@@ -27,19 +33,20 @@ window#waybar {
 
 #workspaces button.visible {
     color: #d9d8d8;
-    background-color: #231f20;
+    background: #231f20;
     border-bottom: 3px solid rgba(0, 0, 0, 0.30);
 }
 
 #workspaces button.focused {
     color: #231f20;
-    background-color: #009ddc;
+    background: #009ddc;
     border-bottom: 3px solid rgba(0, 0, 0, 0.30);
 }
 
 #workspaces button.urgent {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-bottom: 3px solid #cc6666;
+    color: #231f20;
+    background: #cc6666;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.30);
 }
 
 #clock,
@@ -54,10 +61,16 @@ window#waybar {
     border-bottom: 3px solid transparent;
 }
 
+#custom-arch-updates {
+    color: #231f20;
+    background: #009ddc;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.30);
+}
+
 #mode {
     padding: 0 18px;
     color: #d9d8d8;
-    background-color: #00853e;
+    background: #00853e;
     border-bottom: 3px solid rgba(0, 0, 0, 0.30);
 }
 
@@ -76,6 +89,6 @@ window#waybar {
 
 #battery.critical:not(.charging) {
     border-bottom: 3px solid rgba(0, 0, 0, 0.30);
-    background-color: #ee2e24;
+    background: #ee2e24;
     color: #ffffff;
 }

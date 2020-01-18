@@ -19,13 +19,13 @@ set $run wofi --show drun
 set $ws1 "1 爵"
 set $ws2 "2 "
 set $ws3 "3 "
-set $ws4 "4 切"
-set $ws5 "5 阮"
-set $ws6 "6 "
-set $ws7 "7 "
-set $ws8 "8 "
-set $ws9 "9 "
-set $ws10 "10 "
+set $ws4 "4 "
+set $ws5 "5 切"
+set $ws6 "6 阮"
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
 
 #-------------------
 # Outputs
@@ -52,13 +52,17 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
     natural_scroll enabled
 }
 
+input 1:1:AT_Translated_Set_2_keyboard {
+    xkb_options caps:super
+}
+
 #-------------------
 # Layout & Appearance
 #-------------------
 
 # Borders
 default_border pixel 2
-default_floating_border normal=
+default_floating_border normal
 
 # Gaps
 gaps inner 15
@@ -86,11 +90,14 @@ client.focused_inactive $base02 $base02 $base03 $base01 $base02
 client.unfocused $base01 $base01 $base03 $base01 $base01
 client.urgent $base02 $base08 $base07 $base08 $base02 
 
-# Window
+## Window
+# Enable all windows with app_id 'floating' to float.
 for_window [app_id="floating"] {
     floating enable
     resize set height 50ppt
 }
+# All other per-app settings are in a separate file (not tracked by git).
+include apps-config
 
 #-------------------
 # Bindings
@@ -215,6 +222,15 @@ mode "resize" {
 }
 bindsym $mod+z mode "resize"
 
+## Special keys
+
+bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $SWAYSOCK.wob
+bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $SWAYSOCK.wob
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
+
+bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+
 #-------------------
 # Bar (handled by waybar)
 #-------------------
@@ -223,4 +239,19 @@ bar {
     swaybar_command waybar
 }
 
+#-------------------
+# GTK themes
+#-------------------
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'vimix-dark-doder'
+    gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+    gsettings set $gnome-schema cursor-theme 'Paper'
+    gsettings set $gnome-schema font-name 'Roboto 10'
+}
+
 include /etc/sway/config.d/*
+exec mkfifo $SWAYSOCK.wob 
+exec tail -f $SWAYSOCK.wob | wob

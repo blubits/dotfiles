@@ -4,7 +4,8 @@
     //-------------------
     "layer": "top",
     "output": "eDP-1",
-    "height": 40,
+    "height": 45,
+    "margin-bottom": "-5px",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-right": ["custom/arch-updates", "pulseaudio", "network", "battery", "clock"],
     //-------------------
@@ -27,7 +28,7 @@
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-bluetooth": "{icon} {volume}%",
-        "format-bluetooth-muted": "ﱝ {icon}",
+        "format-bluetooth-muted": "{icon} muted",
         "format-muted": "ﱝ muted",
         "format-source": "{volume}% ",
         "format-source-muted": "",
@@ -46,21 +47,31 @@
         "format-wifi": "{icon} {essid}",
         "format-ethernet": " {ifname}: {ipaddr}",
         "format-linked": " {ifname}: no IP",
-        "format-disconnected": " disconnected",
+        "format-disconnected": "睊 disconnected",
         "format-alt": "{ifname}: {ipaddr}",
         "format-icons": ["", "", "", ""]
     },
     "battery": {
         "states": {
+            "step6": 85,
+            "step5": 70,
+            "step4": 55,
+            "step3": 40,
+            "step2": 25,
             "warning": 20,
             "critical": 10
         },
         "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-charging-step2": " {capacity}%",
+        "format-charging-step3": " {capacity}%",
+        "format-charging-step4": " {capacity}%",
+        "format-charging-step5": " {capacity}%",
+        "format-charging-step6": " {capacity}%",
         "format-full": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-icons": {
-            "charging": ["", "", "", "", "", "", ""],
+            "charging": ["", "", "", "", "", ""],
             "default": ["", "", "", "", "", "", "", "", "", ""]
         },
         "format-alt": "{icon} {time}"
@@ -75,7 +86,7 @@
     //-------------------
     "layer": "top",
     "output": "DP-2",
-    "height": 40,
+    "height": 50,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-right": ["custom/spotify", "clock"],
     //-------------------
@@ -91,6 +102,10 @@
         "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotifyd",
         "exec-if": "pgrep spt",
         "on-click": "swaymsg workspace '5 阮'"
+    },
+    "clock": {
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "interval": 10,

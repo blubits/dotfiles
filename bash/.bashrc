@@ -12,6 +12,8 @@ export PS1="\[\033[38;5;12m\]>>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\
 #-------------------
 
 PATH=~/.bin:~/.bin/warnai:~/.local/bin:$PATH
+QT_QPA_PLATFORM=wayland-egl
+QT_WAYLAND_FORCE_DPI=physical
 
 #-------------------
 # Aliases
