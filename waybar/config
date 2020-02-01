@@ -6,8 +6,9 @@
     "output": "eDP-1",
     "height": 45,
     "margin-bottom": "-5px",
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["custom/arch-updates", "pulseaudio", "network", "battery", "clock"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/arch-updates"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "pulseaudio", "battery"],
     //-------------------
     // Modules
     //-------------------
@@ -16,20 +17,20 @@
         "max-length": 50
     },
     "sway/mode": {
-        "format": "缾 {}"
+        "format": "缾  {}"
     },
     "custom/arch-updates": {
-        "format": " {}",
+        "format": "  {}",
         "interval": 3600,
         "exec": "$HOME/sys/dotfiles/waybar/updates-arch-combined.sh",
-        "on-click": "kitty yay -Syu; pkill -SIGRTMIN+8 waybar",
+        "on-click": "kitty --class floating yay -Syu; pkill -SIGRTMIN+8 waybar",
         "signal": 8
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
-        "format-bluetooth-muted": "{icon} muted",
-        "format-muted": "ﱝ muted",
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-bluetooth-muted": "{icon}  muted",
+        "format-muted": "&#8206;ﱝ&#8206;  muted",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -44,32 +45,34 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{icon} {essid}",
-        "format-ethernet": " {ifname}: {ipaddr}",
-        "format-linked": " {ifname}: no IP",
-        "format-disconnected": "睊 disconnected",
-        "format-alt": "{ifname}: {ipaddr}",
+        "format-wifi": "{icon}",
+        "format-ethernet": "  {ifname}: {ipaddr}",
+        "format-linked": "  {ifname}: no IP",
+        "format-disconnected": "睊  disconnected",
+        "tooltip-format-wifi": "{icon}  {essid}",
         "format-icons": ["", "", "", ""]
     },
     "battery": {
         "states": {
-            "step6": 85,
-            "step5": 70,
-            "step4": 55,
-            "step3": 40,
-            "step2": 25,
+            "step6": 99,
+            "step5": 89,
+            "step4": 79,
+            "step3": 59,
+            "step2": 39,
+            "step1": 29,
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-charging-step2": " {capacity}%",
-        "format-charging-step3": " {capacity}%",
-        "format-charging-step4": " {capacity}%",
-        "format-charging-step5": " {capacity}%",
-        "format-charging-step6": " {capacity}%",
-        "format-full": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-charging-step1": "  {capacity}%",
+        "format-charging-step2": "  {capacity}%",
+        "format-charging-step3": "  {capacity}%",
+        "format-charging-step4": "  {capacity}%",
+        "format-charging-step5": "  {capacity}%",
+        "format-charging-step6": "  {capacity}%",
+        "format-full": "  {capacity}%",
+        "format-plugged": "&#8206;ﮣ&#8206;  {capacity}%",
         "format-icons": {
             "charging": ["", "", "", "", "", ""],
             "default": ["", "", "", "", "", "", "", "", "", ""]
@@ -88,15 +91,16 @@
     "output": "DP-2",
     "height": 50,
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["custom/spotify", "clock"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/spotify"],
     //-------------------
     // Secondary bar modules
     //-------------------
     "sway/mode": {
-        "format": "缾 {}"
+        "format": "缾  {}"
     },
     "custom/spotify": {
-        "format": "阮 {}",
+        "format": "阮  {}",
         "return-type": "json",
         "max-length": 50,
         "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotifyd",
@@ -109,6 +113,6 @@
     },
     "cpu": {
         "interval": 10,
-        "format": "﬙ {}%"
+        "format": "﬙  R{}%"
     }
 }]

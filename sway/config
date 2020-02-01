@@ -1,6 +1,6 @@
-#-------------------
+####################
 # Variables
-#-------------------
+####################
 
 ## Modifier key. Mod4 is Super/Win
 set $mod Mod4
@@ -16,20 +16,20 @@ set $term kitty
 set $run wofi --show drun
 
 ## Workspaces
-set $ws1 "1 爵"
-set $ws2 "2 "
-set $ws3 "3 "
-set $ws4 "4 "
-set $ws5 "5 切"
-set $ws6 "6 阮"
-set $ws7 "7 "
-set $ws8 "8 "
-set $ws9 "9 "
-set $ws10 "10 "
+set $ws1 ""
+set $ws2 ""
+set $ws3 ""
+set $ws4 ""
+set $ws5 ""
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 ""
 
-#-------------------
+####################
 # Outputs
-#-------------------
+####################
 
 ## Displays
 # By default, sway will output to 1080p. This will allow it to autodetect
@@ -39,11 +39,11 @@ output eDP-1 scale 2
 output eDP-1 pos 0 0 res 3840x2160
 
 ## Wallpaper
-output * bg "/home/blubits/pics/Wallpapers/Lanes.png" fill
+output * bg "/home/blubits/pics/Wallpapers/Train.jpg" fill
 
-#-------------------
+####################
 # Inputs
-#-------------------
+####################
 
 input 2:7:SynPS/2_Synaptics_TouchPad {
     tap enabled
@@ -56,9 +56,9 @@ input 1:1:AT_Translated_Set_2_keyboard {
     xkb_options caps:super
 }
 
-#-------------------
+####################
 # Layout & Appearance
-#-------------------
+####################
 
 # Borders
 default_border pixel 2
@@ -99,9 +99,9 @@ for_window [app_id="floating"] {
 # All other per-app settings are in a separate file (not tracked by git).
 include apps-config
 
-#-------------------
+####################
 # Bindings
-#-------------------
+####################
 
 ## Floating modifier
 # $mod + left click to drag, $mod + right click to resize.
@@ -110,9 +110,12 @@ floating_modifier $mod normal
 ## Programs
 bindsym $mod+Return exec $term
 bindsym $mod+r exec $run
+bindsym Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
+bindsym Shift+Print exec grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
+bindsym $mod+semicolon exec swaylock-blur -- -f
 
 # Quit
-bindsym $mod+q kill
+bindsym $mod+q kill 
 
 ## Sway
 # Reload the configuration file
@@ -173,6 +176,10 @@ bindsym $mod+Ctrl+Right move workspace to output right
 bindsym $mod+Ctrl+$left move workspace to output left
 bindsym $mod+Ctrl+$right move workspace to output right
 
+# Cycle between workspaces
+bindsym $mod+Tab workspace next_on_output
+bindsym $mod+Shift+Tab workspace next
+
 ## Layouts
 # Switch between layouts on a container (stacking, tabbed, or regular split)
 bindsym $mod+g layout stacking
@@ -231,17 +238,17 @@ bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo
 bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
 bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
 
-#-------------------
+####################
 # Bar (handled by waybar)
-#-------------------
+####################
 
 bar {
     swaybar_command waybar
 }
 
-#-------------------
+####################
 # GTK themes
-#-------------------
+####################
 
 set $gnome-schema org.gnome.desktop.interface
 
@@ -249,9 +256,15 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'vimix-dark-doder'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
     gsettings set $gnome-schema cursor-theme 'Paper'
-    gsettings set $gnome-schema font-name 'Roboto 10'
+    gsettings set $gnome-schema font-name 'SF Pro Display 11'
 }
 
 include /etc/sway/config.d/*
 exec mkfifo $SWAYSOCK.wob 
 exec tail -f $SWAYSOCK.wob | wob
+
+exec swayidle -w \
+        timeout 300 'swaylock-blur -- -f' \
+        timeout 600 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock-blur -- -f'

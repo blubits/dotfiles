@@ -1,27 +1,36 @@
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 ####################
-# Prompt
+# oh-my-zsh settings
 ####################
 
-export PS1="\[\033[38;5;12m\]>>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+ZSH=/usr/share/oh-my-zsh/
+
+# Theme
+ZSH_THEME="typewritten/typewritten"
+
+# Disable auto update checks
+DISABLE_AUTO_UPDATE="true"
+
+# Command autocorrection
+ENABLE_CORRECTION="true"
+
+# Display dots while waiting for completion
+COMPLETION_WAITING_DOTS="true"
+
+#Time stamp in history file
+HIST_STAMPS="yyyy-mm-dd"
+
+# Plugins
+plugins=(git)
 
 ####################
 # Environment variables
 ####################
 
-PATH=~/.bin:~/.bin/warnai:~/.local/bin:$PATH
-QT_QPA_PLATFORM=wayland-egl
-QT_WAYLAND_FORCE_DPI=physical
+export PATH=~/.bin:~/.local/bin:$PATH
 
 ####################
 # Aliases
 ####################
-
-# Enable color
-alias todoist='todoist --color'
-alias ls='ls --color=auto'
 
 # Integrate pacman and yay, make the yay command AUR-only
 alias pac='/usr/bin/pacman'
@@ -38,4 +47,9 @@ man() {
     command man "$@"
 }
 
-eval $(keychain --eval --quiet id_rsa)
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
