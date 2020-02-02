@@ -4,8 +4,7 @@
     //-------------------
     "layer": "top",
     "output": "eDP-1",
-    "height": 45,
-    "margin-bottom": "-5px",
+    "height": 40,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/arch-updates"],
     "modules-center": ["clock"],
     "modules-right": ["network", "pulseaudio", "battery"],
@@ -27,8 +26,8 @@
         "signal": 8
     },
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon}  {volume}%",
+        "format": "<big>{icon}</big>  {volume}%",
+        "format-bluetooth": "<big>{icon}</big>  {volume}%",
         "format-bluetooth-muted": "{icon}  muted",
         "format-muted": "&#8206;ﱝ&#8206;  muted",
         "format-source": "{volume}% ",
@@ -45,7 +44,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{icon}",
+        "format-wifi": "<big>{icon}</big>",
         "format-ethernet": "  {ifname}: {ipaddr}",
         "format-linked": "  {ifname}: no IP",
         "format-disconnected": "睊  disconnected",
@@ -63,7 +62,7 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}  {capacity}%",
+        "format": "<big>{icon}</big>  {capacity}%",
         "format-charging": "  {capacity}%",
         "format-charging-step1": "  {capacity}%",
         "format-charging-step2": "  {capacity}%",
@@ -89,7 +88,7 @@
     //-------------------
     "layer": "top",
     "output": "DP-2",
-    "height": 50,
+    "height": 40,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
     "modules-right": ["custom/spotify"],

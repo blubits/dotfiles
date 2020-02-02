@@ -35,8 +35,11 @@ set $ws10 ""
 # By default, sway will output to 1080p. This will allow it to autodetect
 # any non-4K monitor and output the appropriate resolution. The internal
 # laptop display (eDP-1) is set up to scale up to 4K.
-output eDP-1 scale 2
-output eDP-1 pos 0 0 res 3840x2160
+output eDP-1 {
+    scale 2
+    scale_filter smart
+    pos 0 0 res 3840x2160
+}
 
 ## Wallpaper
 output * bg "/home/blubits/pics/Wallpapers/Train.jpg" fill
@@ -57,7 +60,7 @@ input 1:1:AT_Translated_Set_2_keyboard {
 }
 
 ####################
-# Layout & Appearance
+# Layout & appearance
 ####################
 
 # Borders
@@ -250,10 +253,12 @@ bar {
 # GTK themes
 ####################
 
+#seat seat0 xcursor_theme 'Paper' 48
+
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'vimix-dark-doder'
+    gsettings set $gnome-schema gtk-theme 'vimix-dark-laptop'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
     gsettings set $gnome-schema cursor-theme 'Paper'
     gsettings set $gnome-schema font-name 'SF Pro Display 11'

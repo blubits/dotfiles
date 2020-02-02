@@ -16,10 +16,10 @@ fi
 
 updates=$(("$updates_arch" + "$updates_aur"))
 
-if [ "$updates" -eq 1]; then
+if [ "$updates" -eq 1 ]; then
     echo -e "$updates update\\n$updates_arch from repositories, $updates_aur from AUR\\nupdates-arch"
 elif [ "$updates" -gt 0 ]; then
     echo -e "$updates updates\\n$updates_arch from repositories, $updates_aur from AUR\\nupdates-arch"
 else
-    echo ""
+    echo -e ""
 fi
