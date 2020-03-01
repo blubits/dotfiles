@@ -48,7 +48,7 @@ window > box {
 
 #workspaces button.urgent {
     font-size: inherit;
-    border-bottom: 3px solid #cc6666;
+    border-top: 3px solid #ee2e24;
 }
 
 #clock,
@@ -64,21 +64,38 @@ window > box {
     border-bottom: 3px solid transparent;
 }
 
+#idle_inhibitor {
+    font-size: 15px;
+    padding: 0px 28px 0px 24px;
+    margin: 4px 12px;
+    border-bottom: 3px solid transparent;
+    border-radius: 18px;
+    border: 1px solid white;
+}
+
+#idle_inhibitor.activated {
+    font-size: 15px;
+    color: black;
+    background-color: #ffd204;
+    margin: 4px 12px;
+    border-radius: 18px;
+}
+
 #custom-arch-updates, #mode {
     font-size: 15px;
     padding: 0 15px;
     color: white;
     background-color: rgba(0, 0, 0, 0.3);
-    margin: 4px 12px;
+    margin: 0px 12px 0px;
     border-radius: 24px;
 }
 
 #pulseaudio.bluetooth {
-    border-bottom: 3px solid #009ddc;
+    border-top: 3px solid #009ddc;
 }
 
 #network.disconnected {
-    border-bottom: 3px solid #ee2e24;
+    border-top: 3px solid #ee2e24;
 }
 
 #battery.warning:not(.charging) {
@@ -86,7 +103,13 @@ window > box {
 }
 
 #battery.critical:not(.charging) {
-    border-bottom: 3px solid rgba(0, 0, 0, 0.30);
-    background: #ee2e24;
-    color: #ffffff;
+    color: white;
+    background-color: #ee2e24;
+    margin: 4px 12px 0px;
+    border-radius: 24px;
+}
+
+big {
+    color: #000000;
+    margin-right: 2px;
 }

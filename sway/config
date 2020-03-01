@@ -16,16 +16,16 @@ set $term kitty
 set $run wofi --show drun
 
 ## Workspaces
-set $ws1 ""
-set $ws2 ""
-set $ws3 ""
-set $ws4 ""
-set $ws5 ""
-set $ws6 ""
-set $ws7 ""
-set $ws8 ""
-set $ws9 ""
-set $ws10 ""
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 ####################
 # Outputs
@@ -42,7 +42,7 @@ output eDP-1 {
 }
 
 ## Wallpaper
-output * bg "/home/blubits/pics/Wallpapers/Train.jpg" fill
+output * bg "/home/blubits/pics/Wallpapers/Game of Life.png" fill
 
 ####################
 # Inputs
@@ -113,6 +113,7 @@ floating_modifier $mod normal
 ## Programs
 bindsym $mod+Return exec $term
 bindsym $mod+r exec $run
+bindcode 133 --release exec sgtk-grid
 bindsym Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
 bindsym Shift+Print exec grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y%m%d%H%M%S.png')
 bindsym $mod+semicolon exec swaylock-blur -- -f
@@ -272,4 +273,4 @@ exec swayidle -w \
         timeout 300 'swaylock-blur -- -f' \
         timeout 600 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock-blur -- -f'
+        before-sleep 'swaylock-blur -- -f'R

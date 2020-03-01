@@ -6,28 +6,37 @@
     "output": "eDP-1",
     "height": 40,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/arch-updates"],
-    "modules-center": ["clock"],
-    "modules-right": ["network", "pulseaudio", "battery"],
+    "modules-right": ["network", "pulseaudio", "battery", "clock"],
     //-------------------
     // Modules
     //-------------------
-    "sway/window": {
-        "format": "",
-        "max-length": 50
+    "sway/workspaces": {
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": ""
+        }
     },
     "sway/mode": {
         "format": "缾  {}"
     },
     "custom/arch-updates": {
-        "format": "  {}",
+        "format": "   {}",
         "interval": 3600,
         "exec": "$HOME/sys/dotfiles/waybar/updates-arch-combined.sh",
-        "on-click": "kitty --class floating yay -Syu; pkill -SIGRTMIN+8 waybar",
+        "on-click": "kitty --class arch_update yay -Syu; pkill -SIGRTMIN+8 waybar",
         "signal": 8
     },
     "pulseaudio": {
-        "format": "<big>{icon}</big>  {volume}%",
-        "format-bluetooth": "<big>{icon}</big>  {volume}%",
+        "format": "{icon}   {volume}%",
+        "format-bluetooth": "{icon}   {volume}%",
         "format-bluetooth-muted": "{icon}  muted",
         "format-muted": "&#8206;ﱝ&#8206;  muted",
         "format-source": "{volume}% ",
@@ -44,10 +53,10 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "<big>{icon}</big>",
+        "format-wifi": "{icon}",
         "format-ethernet": "  {ifname}: {ipaddr}",
         "format-linked": "  {ifname}: no IP",
-        "format-disconnected": "睊  disconnected",
+        "format-disconnected": "睊",
         "tooltip-format-wifi": "{icon}  {essid}",
         "format-icons": ["", "", "", ""]
     },
@@ -62,15 +71,15 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "<big>{icon}</big>  {capacity}%",
-        "format-charging": "  {capacity}%",
-        "format-charging-step1": "  {capacity}%",
-        "format-charging-step2": "  {capacity}%",
-        "format-charging-step3": "  {capacity}%",
-        "format-charging-step4": "  {capacity}%",
-        "format-charging-step5": "  {capacity}%",
-        "format-charging-step6": "  {capacity}%",
-        "format-full": "  {capacity}%",
+        "format": "{icon}  {capacity}%",
+        "format-charging": "   {capacity}%",
+        "format-charging-step1": "   {capacity}%",
+        "format-charging-step2": "   {capacity}%",
+        "format-charging-step3": "   {capacity}%",
+        "format-charging-step4": "   {capacity}%",
+        "format-charging-step5": "   {capacity}%",
+        "format-charging-step6": "   {capacity}%",
+        "format-full": "   {capacity}%",
         "format-plugged": "&#8206;ﮣ&#8206;  {capacity}%",
         "format-icons": {
             "charging": ["", "", "", "", "", ""],
@@ -90,19 +99,39 @@
     "output": "DP-2",
     "height": 40,
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/spotify"],
+    "modules-right": ["idle_inhibitor", "custom/spotify", "clock"],
     //-------------------
     // Secondary bar modules
     //-------------------
+    "sway/workspaces": {
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": ""
+        }
+    },
     "sway/mode": {
         "format": "缾  {}"
     },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
     "custom/spotify": {
-        "format": "阮  {}",
+        "format": "阮   {}",
         "return-type": "json",
         "max-length": 50,
-        "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotifyd",
+        "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotify",
         "exec-if": "pgrep spt",
         "on-click": "swaymsg workspace '5 阮'"
     },

@@ -14,14 +14,16 @@ window {
     border-radius: 10px 10px 0 0;
 }
 
-#inner-box {
+#entry {
     font-weight: 500;
     font-size: 16px;
     padding: 6px 12px;
 }
 
-#selected {
+#entry:selected {
     background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: none;
 }
 
 #text {
