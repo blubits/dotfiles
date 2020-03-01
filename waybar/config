@@ -132,8 +132,7 @@
         "return-type": "json",
         "max-length": 50,
         "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotify",
-        "exec-if": "pgrep spt",
-        "on-click": "swaymsg workspace '5 阮'"
+        "exec-if": "pgrep spotify"
     },
     "clock": {
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",

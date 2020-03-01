@@ -27,6 +27,7 @@ plugins=(git)
 ####################
 
 export PATH=~/.bin:~/.local/bin:$PATH
+export SSH_ASKPASS=ssh_askpass
 
 ####################
 # Aliases
