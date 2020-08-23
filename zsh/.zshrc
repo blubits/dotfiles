@@ -37,6 +37,7 @@ export SSH_ASKPASS=ssh_askpass
 alias pac='/usr/bin/pacman'
 alias pacman='/usr/bin/yay'
 alias yay='/usr/bin/yay --aur'
+alias cat='bat'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

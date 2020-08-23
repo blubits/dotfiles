@@ -42,7 +42,7 @@ output eDP-1 {
 }
 
 ## Wallpaper
-output * bg "/home/blubits/pics/Wallpapers/Game of Life.png" fill
+output * bg "/home/blubits/pics/Wallpapers/Adidas Old Skool - Blue.png" fill
 
 ####################
 # Inputs
@@ -239,8 +239,9 @@ bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $SWAYS
 bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $SWAYSOCK.wob
 bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
 
-bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
-bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+
 
 ####################
 # Bar (handled by waybar)
@@ -259,7 +260,7 @@ bar {
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'vimix-dark-laptop'
+    gsettings set $gnome-schema gtk-theme 'Materia-dark'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
     gsettings set $gnome-schema cursor-theme 'Paper'
     gsettings set $gnome-schema font-name 'SF Pro Display 11'
@@ -275,5 +276,10 @@ exec swayidle -w \
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock-blur -- -f'R
 
+exec /usr/lib/kdeconnectd
+
+exec redshift
+
 exec eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 exec export SSH_AUTH_SOCK
+exec export DESKTOP_SESSION=gnome

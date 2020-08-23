@@ -3,14 +3,17 @@
     // Main bar layout
     //-------------------
     "layer": "top",
+    "position": "bottom",
     "output": "eDP-1",
     "height": 40,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/arch-updates"],
-    "modules-right": ["network", "pulseaudio", "battery", "clock"],
+    "modules-left": ["clock", "sway/mode", "custom/arch-updates"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["custom/spotify-status", "custom/spotify-previous", "custom/spotify-next", "network", "custom/vpn", "pulseaudio", "battery"],
     //-------------------
     // Modules
     //-------------------
     "sway/workspaces": {
+        "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
@@ -25,31 +28,36 @@
         }
     },
     "sway/mode": {
-        "format": "缾  {}"
+        "format": "缾 {}"
     },
     "custom/arch-updates": {
-        "format": "   {}",
+        "format": "ﮮ {}",
         "interval": 3600,
         "exec": "$HOME/sys/dotfiles/waybar/updates-arch-combined.sh",
         "on-click": "kitty --class arch_update yay -Syu; pkill -SIGRTMIN+8 waybar",
         "signal": 8
     },
     "pulseaudio": {
-        "format": "{icon}   {volume}%",
-        "format-bluetooth": "{icon}   {volume}%",
-        "format-bluetooth-muted": "{icon}  muted",
-        "format-muted": "&#8206;ﱝ&#8206;  muted",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "<span color='#2196F3'>{icon}</span> {volume}%",
+        "format-bluetooth-muted": "{icon} muted",
+        "format-muted": "&#8206;ﱝ&#8206; muted",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "&#8206;ﰝ&#8206;",
+            "headphone": "",
+            "hands-free": "&#8206;ﰝ&#8206;",
             "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
             "default": ["奄", "奔", "墳"]
         }
+    },
+    "custom/vpn": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/sys/dotfiles/waybar/proton.py",
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -58,7 +66,8 @@
         "format-linked": "  {ifname}: no IP",
         "format-disconnected": "睊",
         "tooltip-format-wifi": "{icon}  {essid}",
-        "format-icons": ["", "", "", ""]
+        "format-icons": ["", "", "", ""],
+        "on-click": "kitty --class floating sudo wifi-menu"
     },
     "battery": {
         "states": {
@@ -71,16 +80,15 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}  {capacity}%",
-        "format-charging": "   {capacity}%",
-        "format-charging-step1": "   {capacity}%",
-        "format-charging-step2": "   {capacity}%",
-        "format-charging-step3": "   {capacity}%",
-        "format-charging-step4": "   {capacity}%",
-        "format-charging-step5": "   {capacity}%",
-        "format-charging-step6": "   {capacity}%",
-        "format-full": "   {capacity}%",
-        "format-plugged": "&#8206;ﮣ&#8206;  {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-charging-step1": "  {capacity}%",
+        "format-charging-step2": "  {capacity}%",
+        "format-charging-step3": "  {capacity}%",
+        "format-charging-step4": "  {capacity}%",
+        "format-charging-step5": "  {capacity}%",
+        "format-charging-step6": "  {capacity}%",
+        "format-full": "  {capacity}%",  
         "format-icons": {
             "charging": ["", "", "", "", "", ""],
             "default": ["", "", "", "", "", "", "", "", "", ""]
@@ -88,22 +96,50 @@
         "format-alt": "{icon} {time}"
     },
     "clock": {
-        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
+        "tooltip-format": "{:%B %Y}\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%a, %b %d}"
+    },
+    "custom/spotify-previous": {
+        "format": "玲 {}",
+        "return-type": "newline",
+        "interval": "once",
+        "exec": "echo '\n\n\n'",
+        "on-click": "$HOME/.bin/waybar-media.py previous",
+        "exec-if": "pgrep spotify"
+    },
+    "custom/spotify-next": {
+        "format": "怜 {}",
+        "return-type": "newline",
+        "interval": "once",
+        "exec": "echo '\n\n\n'",
+        "on-click": "$HOME/.bin/waybar-media.py next",
+        "exec-if": "pgrep spotify"
+    },
+    "custom/spotify-status": {
+        "format": "阮  {}",
+        "return-type": "json",
+        "max-length": 30,
+        "interval": "once",
+        "exec": "$HOME/.bin/waybar-media.py status",
+        "on-click": "$HOME/.bin/waybar-media.py playpause",
+        "exec-if": "pgrep spotify"
     }
 }, {
     //-------------------
     // Secondary bar layout
     //-------------------
     "layer": "top",
+    "position": "bottom",
     "output": "DP-2",
     "height": 40,
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["idle_inhibitor", "custom/spotify", "clock"],
+    "modules-left": ["sway/mode"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["idle_inhibitor"],
     //-------------------
     // Secondary bar modules
     //-------------------
     "sway/workspaces": {
+        "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
@@ -118,7 +154,7 @@
         }
     },
     "sway/mode": {
-        "format": "缾  {}"
+        "format": "缾 {}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -127,19 +163,12 @@
             "deactivated": ""
         }
     },
-    "custom/spotify": {
-        "format": "阮   {}",
-        "return-type": "json",
-        "max-length": 50,
-        "exec": "$HOME/sys/dotfiles/waybar/mediaplayer.py --player spotify",
-        "exec-if": "pgrep spotify"
-    },
     "clock": {
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "interval": 10,
-        "format": "﬙  R{}%"
+        "format": "﬙  {}%"
     }
 }]
