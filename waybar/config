@@ -70,6 +70,7 @@
         "on-click": "kitty --class floating sudo wifi-menu"
     },
     "battery": {
+        "bat": "BAT0",
         "states": {
             "step6": 99,
             "step5": 89,
@@ -89,10 +90,7 @@
         "format-charging-step5": "  {capacity}%",
         "format-charging-step6": "  {capacity}%",
         "format-full": "  {capacity}%",  
-        "format-icons": {
-            "charging": ["", "", "", "", "", ""],
-            "default": ["", "", "", "", "", "", "", "", "", ""]
-        },
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
         "format-alt": "{icon} {time}"
     },
     "clock": {
@@ -119,7 +117,6 @@
         "format": "阮  {}",
         "return-type": "json",
         "max-length": 30,
-        "interval": "once",
         "exec": "$HOME/.bin/waybar-media.py status",
         "on-click": "$HOME/.bin/waybar-media.py playpause",
         "exec-if": "pgrep spotify"

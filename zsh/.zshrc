@@ -6,6 +6,7 @@ ZSH=/usr/share/oh-my-zsh/
 
 # Theme
 ZSH_THEME="typewritten/typewritten"
+TYPEWRITTEN_SYMBOL="$"
 
 # Disable auto update checks
 DISABLE_AUTO_UPDATE="true"
@@ -55,3 +56,14 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+npm set prefix ~/.npm
+PATH+="$HOME/.npm/bin"
+
+# opam configuration
+test -r /home/blubits/.opam/opam-init/init.zsh && . /home/blubits/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Set typewritten ZSH as a prompt
+fpath+=$HOME/.zsh/typewritten
+autoload -U promptinit; promptinit
+prompt typewritten
